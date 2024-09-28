@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: rgb(252, 216, 135);
+            color: rgb(254, 118, 13);
+            padding: 10px 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo a {
+            color: rgb(254, 118, 13);
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: rgb(254, 118, 13);
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: #ff6f61;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input {
+            padding: 5px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .search-bar button {
+            padding: 5px 10px;
+            margin-left: 5px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #ff3b30;
+        }
+
+        /* Hamburger Menu for Mobile */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 4px;
+        }
+
+        /* Phones Section */
+        .phones-section {
+            background-color: rgb(254, 245, 209);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 0px;
+            padding: 50px 30px 0;
+        }
+
+        .phone {
+            width: 200px;
+            height: 400px;
+            margin: 5px;
+            padding: 5px;
+            background-color: rgb(253, 242, 161);
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .phone:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .phone img {
+            width: 100%;
+            height: 50%;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .phone h2 {
+            font-size: 30px;
+            margin: 10px 0;
+        }
+
+        .phone p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                height: 100vh;
+                top: 60px;
+                flex-direction: column;
+                align-items: center;
+                background-color: #333;
+                width: 100%;
+                display: none;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
+            .phones-section {
+                justify-content: center;
+            }
+
+            .phone {
+                width: 100%;
+                max-width: 300px;
+                margin: 10px auto;
+            }
+       }
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">PhoneShop</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#phones">Phones</a></li>
+                <li><a href="#accessories">Accessories</a></li>
+                <li><a href="#deals">Deals</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="phones-section">
+
+        {% for phone in phones %}
+        <div class="phone">
+            <img class="rasm" src="{{ phone.photo.url }}" alt="{{ phone.model }}">
+
+            <div class="text">
+                <p>{{ phone.category }}</p>
+                <h2>{{ phone.model }}</h2>
+                <p>${{ phone.price }}</p>
+                <p>{{ phone.quantity }} in stock</p>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+
+</body>
+</html>
